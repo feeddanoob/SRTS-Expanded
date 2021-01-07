@@ -23,7 +23,7 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\v1.1\Assemblies\</OutputPath>
+    <OutputPath>..\..\v1.2\Assemblies\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -43,11 +43,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BombingTargeter.cs" />
-    <Compile Include="CannonDef.cs" />
-    <Compile Include="CannonHandler.cs" />
-    <Compile Include="CannonTargeter.cs" />
-    <Compile Include="CompCannons.cs" />
-    <Compile Include="CompProperties_Cannons.cs" />
     <Compile Include="DialogSettings.cs" />
     <Compile Include="FallingBomb.cs" />
     <Compile Include="BomberSkyfaller.cs" />
@@ -57,13 +52,11 @@
     <Compile Include="CompLaunchableSRTS.cs" />
     <Compile Include="CompProperties_BombsAway.cs" />
     <Compile Include="CompProperties_LaunchableSRTS.cs" />
-    <Compile Include="FallingBombCE.cs" />
     <Compile Include="FloatMenuGizmo.cs" />
     <Compile Include="Gizmo_MapRefuelableFuelStatus.cs" />
     <Compile Include="HarmonyTest_dp.cs" />
     <Compile Include="HarmonyTest.cs" />
     <Compile Include="HarmonyTest_AJ.cs" />
-    <Compile Include="HelperMethods.cs" />
     <Compile Include="InitializeDefProperties.cs" />
     <Compile Include="ModSettings.cs" />
     <Compile Include="SkyfallerDrawPosUtilityExtended.cs" />
@@ -84,8 +77,9 @@
     <Compile Include="TravelingSRTS.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Lib.Harmony.2.0.1\lib\net472\0Harmony.dll</HintPath>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\..\..\..\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
@@ -93,6 +87,10 @@
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CombatExtended">
+      <HintPath>..\..\..\CombatExtended-Development\Assemblies\CombatExtended.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ISharpZipLib">

@@ -109,7 +109,7 @@ namespace SRTS
           nameof(LaunchAndBombGizmosPassthrough)));
 
       // Vehicles update
-      harmony.Patch(original: AccessTools.Method(typeof(Targeter), nameof(Targeter.TargeterOnGUI)), prefix: null,
+      /*harmony.Patch(original: AccessTools.Method(typeof(Targeter), nameof(Targeter.TargeterOnGUI)), prefix: null,
   postfix: new HarmonyMethod(typeof(ShipHarmony),
   nameof(DrawCannonTargeter)));
       harmony.Patch(original: AccessTools.Method(typeof(Targeter), nameof(Targeter.ProcessInputEvents)), prefix: null,
@@ -117,7 +117,7 @@ namespace SRTS
               nameof(ProcessCannonInputEvents)));
       harmony.Patch(original: AccessTools.Method(typeof(Targeter), nameof(Targeter.TargeterUpdate)), prefix: null,
               postfix: new HarmonyMethod(typeof(ShipHarmony),
-              nameof(CannonTargeterUpdate)));
+              nameof(CannonTargeterUpdate)));*/
 
       /* Destructive Patch Fixes */
       bool sos2Flag = false;
@@ -213,7 +213,7 @@ namespace SRTS
         }
     }*/
 
-    public static void DrawCannonTargeter()
+    /*public static void DrawCannonTargeter()
     {
       HelperMethods.CannonTargeter.TargeterOnGUI();
     }
@@ -226,8 +226,8 @@ namespace SRTS
     public static void CannonTargeterUpdate()
     {
       HelperMethods.CannonTargeter.TargeterUpdate();
-    }
-
+    }*/
+    
 
 
     /// <summary>

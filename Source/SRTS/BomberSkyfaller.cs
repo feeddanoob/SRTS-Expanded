@@ -8,6 +8,8 @@ using Verse;
 using UnityEngine;
 using SPExtended;
 using Verse.Sound;
+using HarmonyLib;
+using CombatExtended;
 
 namespace SRTS
 {
@@ -161,16 +163,30 @@ namespace SRTS
                     continue;
 
                 Block_CEPatched:;
-                    ThingComp CEComp = (thing2 as ThingWithComps)?.AllComps.Find(x => x.GetType().Name == "CompExplosiveCE");
+					ProjectileCE_Explosive bombCE = (ProjectileCE_Explosive)ThingMaker.MakeThing((AccessTools.Field(thing2.def.GetType(), "detonateProjectile").GetValue(thing2.def) as ThingDef), null);
+                    /*ThingComp CEComp = (thing2 as ThingWithComps)?.AllComps.Find(x => x.GetType().Name == "CompExplosiveCE");
                     FallingBombCE CEbombThing = new FallingBombCE(thing2, CEComp.props, CEComp, this.Map, this.def.skyfaller.shadow);
                     CEbombThing.HitPoints = int.MaxValue;
-                    CEbombThing.ticksRemaining = timerTickExplode;
+                    CEbombThing.ticksRemaining = timerTickExplode;*/
                     IntVec3 c2 = (from x in GenRadial.RadialCellsAround(bombPos, GetCurrentTargetingRadius(), true)
                                   where x.InBounds(this.Map)
                                   select x).RandomElementByWeight((IntVec3 x) => 1f - Mathf.Min(x.DistanceTo(this.Position) / GetCurrentTargetingRadius(), 1f) + 0.05f);
-                    CEbombThing.angle = this.angle + (SPTrig.LeftRightOfLine(this.DrawPosCell, this.Position, c2) * -10);
+                    /*CEbombThing.angle = this.angle + (SPTrig.LeftRightOfLine(this.DrawPosCell, this.Position, c2) * -10);
                     CEbombThing.speed = (float)SPExtra.Distance(this.DrawPosCell, c2) / CEbombThing.ticksRemaining;
-                    Thing CEt = GenSpawn.Spawn(CEbombThing, c2, this.Map);
+                    Thing CEt = GenSpawn.Spawn(CEbombThing, c2, this.Map);*/
+					//Basically Im stea- "borrrowing" code from Verb_LaunchProjectileCE.
+                    GenSpawn.Spawn(bombCE, this.DrawPosCell, this.Map);
+                    bombCE.canTargetSelf = false;
+                    bombCE.minCollisionSqr = Mathf.Pow(2, 2);
+                    bombCE.intendedTarget = null;
+                    bombCE.AccuracyFactor = 1f;
+                    bombCE.Launch(this,
+                        this.DrawPosCell.ToIntVec2.ToVector2(),
+                        0f,
+                        this.angle + UnityEngine.Random.Range(-60f, 60f),
+                        5f,
+                        (float)SPExtra.Distance(this.DrawPosCell, c2),
+                        this);
                     //GenExplosion.NotifyNearbyPawnsOfDangerousExplosive(CEt, DamageDefOf., null); /*Is GenExplosion CE compatible?*/
                 }
             }
