@@ -163,8 +163,9 @@ namespace SRTS
                     continue;
 
                     Block_CEPatched:;
-                    //Log.Message((thing2.def as AmmoDef).AmmoSetDefs.ToString());
-					ProjectileCE_Explosive bombCE = (ProjectileCE_Explosive)ThingMaker.MakeThing((AccessTools.Field(thing2.def.GetType(), "detonateProjectile").GetValue(thing2.def) as ThingDef), null);
+                    // Replaced referencing the projectile trough the detonateProjectile property of the item's def with referencing trough AmmoSetDef. The reason is taht not all mortar shells had detonateProjectile. Don't ask how I came up with this.
+                    ProjectileCE_Explosive bombCE = (ProjectileCE_Explosive)ThingMaker.MakeThing((thing2.def as AmmoDef).AmmoSetDefs.Find(set => set.ammoTypes.Any()).ammoTypes.Find(link => link.ammo == (thing2.def as AmmoDef)).projectile, null);
+                    //ProjectileCE_Explosive bombCE = (ProjectileCE_Explosive)ThingMaker.MakeThing((AccessTools.Field(thing2.def.GetType(), "detonateProjectile").GetValue(thing2.def) as ThingDef), null);
                     /*ThingComp CEComp = (thing2 as ThingWithComps)?.AllComps.Find(x => x.GetType().Name == "CompExplosiveCE");
                     FallingBombCE CEbombThing = new FallingBombCE(thing2, CEComp.props, CEComp, this.Map, this.def.skyfaller.shadow);
                     CEbombThing.HitPoints = int.MaxValue;
