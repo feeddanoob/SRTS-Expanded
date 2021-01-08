@@ -1,14 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-  <name>SRTS Expanded</name>
+  <name>SRTS Expanded (CE Fork)</name>
   <author>Neceros</author>
   <supportedVersions>
     <li>1.0</li>
     <li>1.1</li>
     <li>1.2</li>
   </supportedVersions>
-  <packageId>smashphil.neceros.srtsexpanded</packageId>
-  <description>These are flying caravans, meant to load people and cargo and bring it somewhere else -- potentially a very long distance, and back again. These act like drop pods, but are not one use -- when you bring it back home you choose where to land and disembark.
+  <packageId>smashphil.neceros.srtsexpanded.combatextendedfork</packageId>
+  <description>Modified fork of SRTS Expanded to be compatible with Combat Extended. Only tested with Combat Extended's 81mm mortar shells. You can use this fork without Combat Extended, but why are you even using this fork over the original then? All credit for the original mod goes to the original developers.
+
+These are flying caravans, meant to load people and cargo and bring it somewhere else -- potentially a very long distance, and back again. These act like drop pods, but are not one use -- when you bring it back home you choose where to land and disembark.
 
 Great for hauling cargo, trading with factions, assaulting points of interest on your world map, and so much more. Acts as both a caravan and a drop pod.
 

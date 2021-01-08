@@ -162,7 +162,8 @@ namespace SRTS
                     GenExplosion.NotifyNearbyPawnsOfDangerousExplosive(t, thing2.TryGetComp<CompExplosive>().Props.explosiveDamageType, null);
                     continue;
 
-                Block_CEPatched:;
+                    Block_CEPatched:;
+                    //Log.Message((thing2.def as AmmoDef).AmmoSetDefs.ToString());
 					ProjectileCE_Explosive bombCE = (ProjectileCE_Explosive)ThingMaker.MakeThing((AccessTools.Field(thing2.def.GetType(), "detonateProjectile").GetValue(thing2.def) as ThingDef), null);
                     /*ThingComp CEComp = (thing2 as ThingWithComps)?.AllComps.Find(x => x.GetType().Name == "CompExplosiveCE");
                     FallingBombCE CEbombThing = new FallingBombCE(thing2, CEComp.props, CEComp, this.Map, this.def.skyfaller.shadow);
