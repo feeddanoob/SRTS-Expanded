@@ -179,7 +179,7 @@ namespace SRTS
 					//Basically Im stea- "borrrowing" code from Verb_LaunchProjectileCE.
                     GenSpawn.Spawn(bombCE, this.DrawPosCell, this.Map);
                     bombCE.canTargetSelf = false;
-                    bombCE.minCollisionSqr = Mathf.Pow(2, 2);
+                    bombCE.minCollisionDistance = 1;
                     bombCE.intendedTarget = null;
                     bombCE.AccuracyFactor = 1f;
                     bombCE.Launch(this,
