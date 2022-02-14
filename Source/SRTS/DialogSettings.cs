@@ -314,7 +314,7 @@ namespace SRTS
                 explosivesChanged = false;
                 if(SRTSHelper.CEModLoaded)
                 {
-                    explosivesSearched = DefDatabase<ThingDef>.AllDefs.Where(x => x.HasComp(Type.GetType("CombatExtended.CompExplosiveCE,CombatExtended")) && !SRTSMod.mod.settings.allowedBombs.Contains(x.defName)
+                    explosivesSearched = DefDatabase<ThingDef>.AllDefs.Where(x => (x.HasComp(Type.GetType("CombatExtended.CompExplosiveCE,CombatExtended")) || (x.GetCompProperties<CompProperties_Explosive>() != null && x.building is null)) && !SRTSMod.mod.settings.allowedBombs.Contains(x.defName)
                     && CultureInfo.CurrentCulture.CompareInfo.IndexOf(x.defName, explosivesString, CompareOptions.IgnoreCase) >= 0).ToList();
                 }
                 else
