@@ -6,6 +6,8 @@ using System.Text;
 using UnityEngine;
 using Verse;
 using RimWorld;
+using CombatExtended;
+using HarmonyLib;
 
 namespace SRTS
 {
@@ -314,8 +316,8 @@ namespace SRTS
                 explosivesChanged = false;
                 if(SRTSHelper.CEModLoaded)
                 {
-                    explosivesSearched = DefDatabase<ThingDef>.AllDefs.Where(x => (x.HasComp(Type.GetType("CombatExtended.CompExplosiveCE,CombatExtended")) || (x.GetCompProperties<CompProperties_Explosive>() != null && x.building is null)) && !SRTSMod.mod.settings.allowedBombs.Contains(x.defName)
-                    && CultureInfo.CurrentCulture.CompareInfo.IndexOf(x.defName, explosivesString, CompareOptions.IgnoreCase) >= 0).ToList();
+                    explosivesSearched = DefDatabase<ThingDef>.AllDefs.Where(x => (x.GetCompProperties<CompProperties_Explosive>() != null) && x.building is null && !SRTSMod.mod.settings.allowedBombs.Contains(x.defName) && CultureInfo.CurrentCulture.CompareInfo.IndexOf(x.defName, explosivesString, CompareOptions.IgnoreCase) >= 0 && !(x.GetType().FullName.Contains("AmmoDef") || x.defName.StartsWith("Bullet_") || x.IsWeapon)).ToList(); //Base, non-CE explosion objects (like chemfuel)
+                    explosivesSearched.AddRange(DefDatabase<ThingDef>.AllDefs.Where(x => x.GetType().FullName.Contains("AmmoDef") && !SRTSMod.mod.settings.allowedBombs.Contains(x.defName) && CultureInfo.CurrentCulture.CompareInfo.IndexOf(x.defName, explosivesString, CompareOptions.IgnoreCase) >= 0).Where(x => (x as AmmoDef).Users.Any() && (x as AmmoDef).AmmoSetDefs.Find(ammoSet => ammoSet.ammoTypes.Find(ammoLink => ammoLink.projectile.GetCompProperties<CompProperties_ExplosiveCE>() != null || ammoLink.projectile.projectile?.explosionRadius >= 0.5f) != null) != null)); //CE ammos which have explosive projectiles
                 }
                 else
                 {
