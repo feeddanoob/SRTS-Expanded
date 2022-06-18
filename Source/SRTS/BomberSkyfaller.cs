@@ -158,7 +158,7 @@ namespace SRTS
                     if(bombType == BombingType.carpet)
                         bombCells.RemoveAt(0);
                     int timerTickExplode = 20 + Rand.Range(0, 5); //Change later to allow release timer
-                    if (SRTSHelper.CEModLoaded && thing2.GetType().ToString().Contains("AmmoThing")) //AmmoDef class check to have SRTS handle the vanilla explosives
+                    if (SRTSHelper.CEModLoaded && ((thing2 as AmmoThing)?.AmmoDef?.AmmoSetDefs?.Any() ?? false)) //AmmoDef class check to have SRTS handle the vanilla explosives
                         goto Block_CEPatched;
                     FallingBomb bombThing = new FallingBomb(thing2, thing2.TryGetComp<CompExplosive>(), this.Map, this.def.skyfaller.shadow);
                     bombThing.HitPoints = int.MaxValue;
@@ -175,7 +175,7 @@ namespace SRTS
 
                 Block_CEPatched:;
                     // Replaced referencing the projectile trough the detonateProjectile property of the item's def with referencing trough AmmoSetDef. The reason is taht not all mortar shells had detonateProjectile. Don't ask how I came up with this.
-                    ProjectileCE_Explosive CEbombThing = (ProjectileCE_Explosive)ThingMaker.MakeThing((thing2.def as AmmoDef).AmmoSetDefs.Find(set => set.ammoTypes.Any()).ammoTypes.Find(link => link.ammo == (thing2.def as AmmoDef)).projectile, null);
+                    ProjectileCE CEbombThing = (ProjectileCE)ThingMaker.MakeThing((thing2.def as AmmoDef).AmmoSetDefs.Find(set => set.ammoTypes.Any()).ammoTypes.Find(link => link.ammo == (thing2.def as AmmoDef)).projectile, null);
                     //ProjectileCE_Explosive bombCE = (ProjectileCE_Explosive)ThingMaker.MakeThing((AccessTools.Field(thing2.def.GetType(), "detonateProjectile").GetValue(thing2.def) as ThingDef), null);
                     /*ThingComp CEComp = (thing2 as ThingWithComps)?.AllComps.Find(x => x.GetType().Name == "CompExplosiveCE");
                     FallingBombCE CEbombThing = new FallingBombCE(thing2, CEComp.props, CEComp, this.Map, this.def.skyfaller.shadow);
