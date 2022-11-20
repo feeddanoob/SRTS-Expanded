@@ -40,8 +40,4 @@ Conflicts
     <li>neceros.srtsesimplematerials</li>
     <li>CETeam.CombatExtended</li>
   </loadBefore>
-  <loadAfter>
-    <li>brrainz.harmony</li>
-    <li>ludeon.rimworld</li>
-  </loadAfter>
 </ModMetaData>
