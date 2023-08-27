@@ -1,3 +1,6 @@
+# This fork is archived. 
+Someone released a better version here: https://steamcommunity.com/sharedfiles/filedetails/?id=2938738526
+
 ### Please join our discord 
 Report bugs and weird things: https://discordapp.com/invite/AvV7DT5
 
